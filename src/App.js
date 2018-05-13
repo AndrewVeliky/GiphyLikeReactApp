@@ -6,6 +6,7 @@ import Button  from 'react-bootstrap/lib/Button';
 import { Link } from 'react-router-dom'
 import Main from './Main';
 import './App.css';
+import Register from './Register';
 
 
 //material-ui
@@ -13,6 +14,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+
 
 
 class App extends Component {
@@ -46,7 +48,7 @@ class App extends Component {
   
     render() {
         return (
-            <div class="login-page">
+            <div className="login-page">
             <MuiThemeProvider>
               <div>
               <AppBar
@@ -72,6 +74,7 @@ class App extends Component {
                  <Link to="/index" className="button" onClick={(event) => this.validateLoginForm(event)}>LOGIN</Link>
              </div>
              </MuiThemeProvider>
+             <Register />
           </div>
         );
       }
