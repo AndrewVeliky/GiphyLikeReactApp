@@ -1,0 +1,61 @@
+body{
+  margin: 10px;
+  background-color: #222;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.search-bar{
+  width:90%;
+  float: left;
+  margin-bottom: 5%;
+}
+
+.gif{
+  margin-top: 3px;
+  
+}
+
+.gif-sign{
+  text-align: center;
+  background-color: #808080;
+  opacity: 0.8;
+  color: white;
+  width: 75%;
+  border-radius: 8px;
+  opacity: 0.5;
+  margin: 0 auto;
+  z-index: 1;
+  top: 100%;
+}
+
+Image{
+  text-align: center;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

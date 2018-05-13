@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './Main.css';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Image from 'react-bootstrap/lib/Image';
 
