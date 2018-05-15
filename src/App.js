@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import Grid  from 'react-bootstrap/lib/Grid';
-import Row  from 'react-bootstrap/lib/Row';
-import FormControl  from 'react-bootstrap/lib/FormControl';
-import Button  from 'react-bootstrap/lib/Button';
 import { Link } from 'react-router-dom'
-import Main from './Main';
 import './App.css';
 import Register from './Register';
+import Header from './Header';
 
 
 //material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 
@@ -24,7 +19,8 @@ class App extends Component {
             login: "",
             pass: "",
             validLogin: "d-none",
-            validPass: "d-none"
+            validPass: "d-none",
+            logged: false
         }
       
         this.setInitialValue = this.setInitialValue.bind(this);
@@ -40,25 +36,30 @@ class App extends Component {
     validateLoginForm(event){
         if(this.state.login === "" || this.state.pass === ""){
             event.preventDefault(); 
+            this.state.login === "" ? this.setState({validLogin: "warning"}) : this.setState({validLogin: "d-none"});
+            this.state.pass === "" ? this.setState({validPass: "warning"}) : this.setState({validPass: "d-none"});
         }
 
-        this.state.login === "" ? this.setState({validLogin: "warning"}) : this.setState({validLogin: "d-none"});
-        this.state.pass === "" ? this.setState({validPass: "warning"}) : this.setState({validPass: "d-none"});
+        this.setState({logged: true})
     }
   
     render() {
+        const style = {
+            width: `${100}%`
+        }
         return (
             <div className="login-page">
             <MuiThemeProvider>
               <div>
-              <AppBar
-                 title="Login"
+              <Header
+                 text="Login"
                />
                <TextField
                  hintText="Enter your Username"
                  floatingLabelText="Username"
                  name="login"
                  onChange = {(event) => this.setInitialValue(event)}
+                 style={style}
                  />
                  <span className={this.state.validLogin}>*Email required</span>
                <br/>
@@ -68,6 +69,7 @@ class App extends Component {
                    floatingLabelText="Password"
                    name="pass"
                    onChange = {(event) => this.setInitialValue(event)}
+                   style={style}
                    />
                    <span className={this.state.validPass}>*Password required</span>
                  <br/>

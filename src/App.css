@@ -2,6 +2,10 @@
     background-color: white;
     width: 50%;
     margin: auto;
+    padding-top: 1%;
+    padding-left: 3%;
+    padding-right: 3%; 
+    padding-bottom: 1%;
 }
 
 .d-none{
@@ -22,4 +26,14 @@
     display: inline-block;
     font-size: 16px;
     text-decoration: none;
+}
+
+.download-btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    font-size: 10px;
+    cursor: pointer;
+    font-size: 14px;
 }
