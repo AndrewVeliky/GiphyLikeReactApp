@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import Grid  from 'react-bootstrap/lib/Grid';
-import Row  from 'react-bootstrap/lib/Row';
-import FormControl  from 'react-bootstrap/lib/FormControl';
-import Button  from 'react-bootstrap/lib/Button';
+import Header from "./Header"
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 class Register extends Component {
@@ -47,7 +43,6 @@ class Register extends Component {
                 'Content-Type': 'application/json'
               },
             body: jsonString,
-            headers: {"Content-Type": "application/json"}
          });
     }
 
@@ -56,8 +51,8 @@ class Register extends Component {
 
             <MuiThemeProvider>
             <div>
-            <AppBar
-                title="Register"
+            <Header
+                text="Register"
             />
             <TextField
                 hintText="First Name"
