@@ -18,9 +18,13 @@ class App extends Component {
         this.state = {
             login: "",
             pass: "",
+            emptyLogin: "d-none",
+            emptyPass: "d-none",
             validLogin: "d-none",
             validPass: "d-none",
-            logged: false
+            logged: false, 
+            testLogin: "andrewv",
+            testPass: "andrewv"
         }
       
         this.setInitialValue = this.setInitialValue.bind(this);
@@ -36,8 +40,12 @@ class App extends Component {
     validateLoginForm(event){
         if(this.state.login === "" || this.state.pass === ""){
             event.preventDefault(); 
-            this.state.login === "" ? this.setState({validLogin: "warning"}) : this.setState({validLogin: "d-none"});
-            this.state.pass === "" ? this.setState({validPass: "warning"}) : this.setState({validPass: "d-none"});
+            this.state.login === "" ? this.setState({emptyLogin: "warning"}) : this.setState({emptyLogin: "d-none"});
+            this.state.pass === "" ? this.setState({emptyPass: "warning"}) : this.setState({emptyPass: "d-none"});
+        } else if(this.state.login !== this.state.testLogin || this.state.pass !== this.state.testPass){
+            event.preventDefault();
+            this.state.login !== this.state.testLogin ? this.setState({validLogin: "warning", emptyLogin: "d-none"}) : this.setState({validLogin: "d-none", emptyLogin: "d-none"});
+            this.state.pass !== this.state.testPass ? this.setState({validPass: "warning", emptyPass: "d-none"}) : this.setState({validPass: "d-none", emptyPass: "d-none"});
         }
 
         this.setState({logged: true})
@@ -61,7 +69,8 @@ class App extends Component {
                  onChange = {(event) => this.setInitialValue(event)}
                  style={style}
                  />
-                 <span className={this.state.validLogin}>*Email required</span>
+                 <span className={this.state.emptyLogin}>*Email required</span>
+                 <span className={this.state.validLogin}>*Invalid login</span>
                <br/>
                  <TextField
                    type="password"
@@ -71,7 +80,8 @@ class App extends Component {
                    onChange = {(event) => this.setInitialValue(event)}
                    style={style}
                    />
-                   <span className={this.state.validPass}>*Password required</span>
+                   <span className={this.state.emptyPass}>*Password required</span>
+                   <span className={this.state.validPass}>*Invalid password</span>
                  <br/>
                  <Link to="/index" className="button" onClick={(event) => this.validateLoginForm(event)}>LOGIN</Link>
              </div>
