@@ -55,7 +55,16 @@ Image{
   text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.show-more-btn{
+  background-color: rgb(91, 192, 222);
+  color: rgb(255, 255, 255);
+  display: block;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.show-more-btn:hover {
+  background-color: rgb(85, 202, 238);
+  color: rgb(255, 255, 255);
 }

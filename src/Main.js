@@ -13,7 +13,7 @@ class Main extends Component {
     this.state = {
       data: [],
       searchValue: "",
-      limit: 12,
+      offset: 12,
       category: "Trending"
     };
     this.printGifs = this.printGifs.bind(this);
@@ -56,29 +56,40 @@ class Main extends Component {
       this.getTrending();
     }
   }
-/////////////////// add showMore functionality
+
   showMore(){
-    let newData = this.state.data.slice();
-    let limitValue = this.state.limit;
 
     if(this.state.searchValue === ""){
-
-      window.fetch(`https://api.giphy.com/v1/gifs/trending?api_key=gY4KVEKSamCEJ6W1l7VGLRStGR0usw2M&limit=${this.state.limit + 12}&offset=${limitValue}`)
+      window.fetch(`https://api.giphy.com/v1/gifs/trending?api_key=gY4KVEKSamCEJ6W1l7VGLRStGR0usw2M&limit=12&offset=${this.state.offset}`)
           .then(response => response.json())
           .then(pic => {
             const newGifs = pic.data.map(picture => 
               [picture.images.fixed_height.url, picture.title, picture.images.fixed_height_still.width]);
-              newData.concat(newGifs);
+              
+              this.setState((prevState, props)=>({data: prevState.data.concat(newGifs),
+                offset: prevState.offset + 12
+              }));
+              console.log(newGifs.length);
+          });
+          
+    } else {
+      window.fetch(`https://api.giphy.com/v1/gifs/search?api_key=gY4KVEKSamCEJ6W1l7VGLRStGR0usw2M&limit=12&offset=${this.state.offset}&q=${this.state.searchValue}`)
+          .then(response => response.json())
+          .then(pic => {
+            const newGifs = pic.data.map(picture => 
+              [picture.images.fixed_height.url, picture.title, picture.images.fixed_height_still.width]);
+              this.setState((prevState, props)=>({data: prevState.data.concat(newGifs),
+                offset: prevState.offset + 12
+              }));
+              
           });
     }
-    this.setState({data: newData,
-                  limit: limitValue + 12
-    });
+    
   }
 
   printGifs(){
-    const showedGifs = this.state.data.map(element => {
-      return <Gif src={element[0]} title={element[1]} width={element[2]} className="gif"/>
+    const showedGifs = this.state.data.map((element, index) => {
+      return <Gif src={element[0]} title={element[1]} width={element[2]} key={index} className="gif"/>
     });
     
     return showedGifs;
@@ -96,10 +107,10 @@ class Main extends Component {
           placeholder = "start type the name of GIF you wanted"
           onChange={event => this.setInitialValue(event)} />
         <Button onClick={this.searchGifs} bsStyle="info">SEARCH</Button>
-        <div>{this.state.category}</div>
+        <Header text={this.state.category}/>
           {this.printGifs()}
         </Row>
-        <Button onClick={this.showMore}>SHOW MORE</Button>
+        <Button className="show-more-btn" onClick={this.showMore}>SHOW MORE</Button>
       </Grid>
       
     );
